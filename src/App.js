@@ -1,85 +1,97 @@
 import React from 'react'
 
-const kpiData = [
-  { title: 'Активные заявки', value: '128', trend: '+12% за неделю' },
-  { title: 'В обработке', value: '46', trend: 'Среднее время 2ч 14м' },
-  { title: 'Просрочено SLA', value: '7', trend: '-3 за сутки' },
-  { title: 'Новые за сегодня', value: '23', trend: 'Пик в 11:00' }
+const tracks = [
+  { id: '787 K:12', curves: ['curve blue', 'curve orange', 'curve violet'] },
+  { id: '789 K:12', curves: ['curve green'] },
+  { id: '1555 K:12', curves: ['curve blue', 'curve green'] },
+  { id: '1555 K:12', curves: [] }
 ]
 
-const requests = [
-  { id: 'REQ-1042', client: 'ООО Альфа', type: 'Подключение', status: 'В работе', date: '05.03.2026', owner: 'Иванов И.И.' },
-  { id: 'REQ-1039', client: 'ИП Смирнова', type: 'Смена тарифа', status: 'Ожидает', date: '05.03.2026', owner: 'Петров А.А.' },
-  { id: 'REQ-1034', client: 'АО Бета', type: 'Техподдержка', status: 'Просрочено', date: '04.03.2026', owner: 'Сидоров В.В.' },
-  { id: 'REQ-1027', client: 'ООО Гамма', type: 'Подключение', status: 'Закрыто', date: '03.03.2026', owner: 'Кузнецова Н.Н.' }
+const treeItems = [
+  'ТГП Когалымнефтегаз',
+  'Тевлинско - Русскинское м.',
+  'Объекты разработки',
+  'Скважины',
+  'Прочие скважины',
+  'Кусты',
+  'КНС'
 ]
 
-const statusClass = {
-  'В работе': 'badge work',
-  Ожидает: 'badge wait',
-  Просрочено: 'badge late',
-  Закрыто: 'badge done'
+const listItems = ['787 K:12', '879 K:12', '1555 K:12', '789 K:12']
+
+function Track ({ track }) {
+  return (
+    <article className='track'>
+      <header className='trackHead'>
+        <span>{track.id}</span>
+        <div className='trackActions'>
+          <span>⚠</span>
+          <span>↗</span>
+          <span>🔖</span>
+        </div>
+      </header>
+      <div className='trackMeta'>
+        <span>Глубина (м)</span>
+        <span>Перфорация</span>
+        <span>Литология</span>
+      </div>
+      <div className='trackScale'>
+        {Array.from({ length: 9 }).map((_, i) => <div key={i} className='dash' />)}
+      </div>
+      <div className='trackBody'>
+        <div className='rod' />
+        <div className='wellLabel'>БС102-3</div>
+        <div className='curveArea'>
+          {track.curves.map((curve) => <div className={curve} key={curve} />)}
+        </div>
+      </div>
+    </article>
+  )
 }
 
 export default function App () {
   return (
-    <main className='layout'>
-      <header className='topbar'>
-        <div>
-          <p className='eyebrow'>АРМ РРМ / Модуль 4</p>
-          <h1>Экран мониторинга заявок</h1>
+    <div className='screen'>
+      <header className='header'>
+        <div className='brand'>
+          <div className='logo'>LK</div>
+          <strong>АРМ РРМ</strong>
         </div>
-        <button className='primary'>+ Создать заявку</button>
+        <div className='toolbar'>{Array.from({ length: 11 }).map((_, i) => <span key={i} className='icon' />)}</div>
+        <div className='headerRight'>
+          <button className='reportBtn'>Отчеты</button>
+          <span className='link'>Настройки</span>
+          <span className='link'>Выход</span>
+        </div>
       </header>
 
-      <section className='kpiGrid'>
-        {kpiData.map((kpi) => (
-          <article className='kpiCard' key={kpi.title}>
-            <p>{kpi.title}</p>
-            <h2>{kpi.value}</h2>
-            <span>{kpi.trend}</span>
-          </article>
-        ))}
-      </section>
+      <div className='workspace'>
+        <aside className='leftPanel'>
+          <div className='panelTitle'>ИНФОРМАЦИОННОЕ ДЕРЕВО</div>
+          <ul className='tree'>
+            <li className='root'>Лукойл - Западная Сибирь</li>
+            {treeItems.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+          <div className='panelTitle'>СПИСКИ</div>
+          <ul className='list'>
+            <li className='root'>Профайл 1 <span>4</span></li>
+            {listItems.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </aside>
 
-      <section className='panel'>
-        <div className='panelHeader'>
-          <h3>Реестр заявок</h3>
-          <div className='filters'>
-            <button className='chip active'>Все</button>
-            <button className='chip'>В работе</button>
-            <button className='chip'>Ожидают</button>
-            <button className='chip'>Просрочены</button>
+        <main className='main'>
+          <div className='subToolbar'>{Array.from({ length: 12 }).map((_, i) => <span key={i} className='subIcon' />)}</div>
+          <section className='tracks'>{tracks.map((track) => <Track track={track} key={track.id + track.curves.length} />)}</section>
+        </main>
+
+        <aside className='rightPanel'>
+          <div className='rightTitle'>сдвижки абс. отметок</div>
+          <div className='placeholder'>
+            <h3>Выберите скважину</h3>
+            <p>Чтобы увидеть список ее смещений<br />или создать новое</p>
           </div>
-        </div>
-
-        <div className='tableWrap'>
-          <table>
-            <thead>
-              <tr>
-                <th>№ заявки</th>
-                <th>Клиент</th>
-                <th>Тип</th>
-                <th>Статус</th>
-                <th>Дата</th>
-                <th>Ответственный</th>
-              </tr>
-            </thead>
-            <tbody>
-              {requests.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.id}</td>
-                  <td>{row.client}</td>
-                  <td>{row.type}</td>
-                  <td><span className={statusClass[row.status]}>{row.status}</span></td>
-                  <td>{row.date}</td>
-                  <td>{row.owner}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </main>
+        </aside>
+      </div>
+    </div>
   )
 }
