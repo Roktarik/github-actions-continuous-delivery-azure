@@ -1,0 +1,161 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f3f5fb;
+  color: #1b1f2b;
+}
+
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #6d7384;
+  font-size: 13px;
+}
+
+h1 {
+  margin: 6px 0 0;
+  font-size: 30px;
+}
+
+.primary {
+  border: 0;
+  background: #3659f3;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.kpiCard,
+.panel {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+}
+
+.kpiCard {
+  padding: 18px;
+}
+
+.kpiCard p {
+  margin: 0;
+  color: #667085;
+  font-size: 14px;
+}
+
+.kpiCard h2 {
+  margin: 12px 0 8px;
+  font-size: 32px;
+}
+
+.kpiCard span {
+  color: #1d7a46;
+  font-size: 13px;
+}
+
+.panel {
+  padding: 18px;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.panelHeader h3 {
+  margin: 0;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.chip {
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.chip.active {
+  background: #edf1ff;
+  border-color: #3659f3;
+  color: #3659f3;
+}
+
+.tableWrap {
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #eaecf0;
+  font-size: 14px;
+}
+
+th {
+  color: #667085;
+  font-weight: 600;
+}
+
+.badge {
+  border-radius: 100px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.work {
+  background: #e8efff;
+  color: #3659f3;
+}
+
+.wait {
+  background: #fff4d6;
+  color: #8a6100;
+}
+
+.late {
+  background: #ffe6e8;
+  color: #c01048;
+}
+
+.done {
+  background: #e4f9eb;
+  color: #1f8f4f;
+}
